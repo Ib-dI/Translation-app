@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import Translator from "../components/Translator";
 
 export default function Home() {
   return (
@@ -9,6 +10,9 @@ export default function Home() {
         <p className="mb-4">
           Ici, tu vas apprendre 📚 les bases du Shi-Maoré, une langue parlée à Mayotte. Explore nos leçon et teste tes connaissances 😉!
         </p>
+        <section className="mt-8">
+          <Translator />
+        </section>
       </main>
     </div>
   )
