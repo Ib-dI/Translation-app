@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { motion } from "framer-motion"
 import translationsData from '../data/translations.json'
 import { LanguageIcon } from "@heroicons/react/16/solid";
@@ -8,21 +8,37 @@ const translations: Record<string, string> = translationsData;
 export default function Translator() {
   const [inputText, setInputText] = useState<string>('')
   const [translatedText, setTranslatedText] = useState<string>('')
-  const [setsuggestions, setSuggestions] = useState<string[]>([])
+  const [suggestions, setSuggestions] = useState<string[]>([])
   const [error, setError] = useState<string>('')
   const [languageDirection, setLanguageDirection] = useState<'sm-fr' | 'fr-sm'>('fr-sm')
   
+  const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const text = e.target.value
+    setInputText(text)
 
+    if (text.trim().length > 0) {
+      const lowerCaseText = text.trim().toLowerCase()
 
-  const handleTranslate = () => {
-    const lorwerCaseInput = inputText.trim().toLowerCase()
+      // Suggestion basées sur la direction de traduction
+      const suggestionsList = languageDirection === 'fr-sm'
+      ? Object.keys(translations).filter(key => key.startsWith(lowerCaseText))
+      : Object.values(translations).filter(value => value.startsWith(lowerCaseText))
+
+      setSuggestions(suggestionsList.slice(0, 5))
+    } else {
+      setSuggestions([])
+    }
+  }
+
+  const handleTranslate = (suggestion?: string) => {
+    const textToTranslate = suggestion || inputText.trim().toLowerCase()
 
     let translation = ''
 
     if (languageDirection === 'fr-sm') {
-      translation = translations[lorwerCaseInput]
+      translation = translations[textToTranslate]
     } else {
-      translation = Object.keys(translations).find(key => translations[key].toLowerCase() === lorwerCaseInput) || ''
+      translation = Object.keys(translations).find(key => translations[key].toLowerCase() === textToTranslate) || ''
     }
 
     if (translation) {
@@ -64,13 +80,30 @@ export default function Translator() {
 
       <textarea className="w-full p-2 rounded-lg mb-4"
       rows={4}
-      placeholder="Entrez du texte du texte en Shi-Maoré..."
+      placeholder={`Entrez du texte en ${languageDirection === 'sm-fr' ? 'Shi-Maoré' : 'Français'}...`}
       value={inputText}
-      onChange={(e) => setInputText(e.target.value)}
+      onChange={handleInputChange}
       />
+
+      {suggestions.length > 0 && (
+        <div className="bg-white border border-gray-300 rounded-lg p-2 mb-4">
+          <ul>
+            {suggestions.map((suggestion, index) => (
+              <li
+                key={index}
+                className="p-2 hover:bg-blue-100 cursor-pointer"
+                onClick={() => handleTranslate(suggestion)}
+              >
+                {suggestion}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <button
       className="bg-blue-600 ml-auto flex gap-1 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
-      onClick={handleTranslate}
+      onClick={() => handleTranslate()}
       >
         <LanguageIcon className="size-6" />
         Traduire
@@ -78,12 +111,12 @@ export default function Translator() {
 
       {translatedText && (
         <motion.div
-        className="mt-4 p-4 bg-white border rounded-lg"
+        className="mt-4 p-4 bg-white border border-blue-300 rounded-lg"
         initial={{ opacity:0, y:10 }}
         animate={{ opacity:1, y:0 }}
         transition={{ duration:0.4 }}
         >
-          <p className="font-medium">
+          <p className="font-medium font-noto">
             {translatedText}
           </p>
         </motion.div>
@@ -95,7 +128,7 @@ export default function Translator() {
         animate={{ opacity:1, y:0 }}
         transition={{ duration:0.4 }}
         >
-          <p className="text-red-600">
+          <p className="text-red-600 font-noto">
             {error}
           </p>
         </motion.div>

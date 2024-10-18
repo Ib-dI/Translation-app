@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Fira Sans', 'sans-serif']
+        sans: ['Fira Sans', 'sans-serif'],
+        noto: ['Noto Sans']
       }
     },
   },
