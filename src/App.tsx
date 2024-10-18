@@ -1,7 +1,14 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Lessons from './pages/Lessons';
+
 export default function App() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center space-y-4 bg-gray-100">
-      
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/lessons" element={<Lessons />} />
+      </Routes>
+    </Router>
   )
 }
