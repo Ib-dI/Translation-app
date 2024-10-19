@@ -23,6 +23,11 @@ export default function Header() {
               Leçons
             </a>
           </li>
+          <li>
+            <a href="/apprentissage" className="text-white">
+              Quiz
+            </a>
+          </li>
         </ul>
       </nav>
     </header>

@@ -50,7 +50,7 @@ export default function Translator() {
     }
   }
   return (
-    <div className="p-6 w-[72vh] flex flex-col bg-gray-100 rounded-3xl shadow-lg">
+    <div className="p-6 md:w-[72vh] flex flex-col bg-gray-100 rounded-3xl shadow-lg">
       <h3 className="text-2xl font-semibold mb-4">Traducteur Shi-Maoré - Français</h3>
 
       <div className="mb-4 ">
