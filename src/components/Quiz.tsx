@@ -25,7 +25,7 @@ export default function Quiz() {
       setFeedBack('Bonne réponse 🎉!')
       setScore(score + 1)
     } else {
-      setFeedBack(`Faux! La bonne réponse était : ${quizData[currentQuestion].translation}`)
+      setFeedBack(`Faux ! La bonne réponse était : ${quizData[currentQuestion].translation}`)
     }
     setUserAnswer('')
     setCurrentQuestion((prev) => (prev + 1) % quizData.length)
@@ -45,13 +45,13 @@ export default function Quiz() {
   }, [handleAnswerSubmit]);
 
   return (
-    <div className="quiz-container p-6 flex flex-col">
-      <h1 className="text-xl font-bold mb-4">
-        Mode Apprentissage (Quiz Interactif)
+    <div className="quiz-container mt-24 md:mt-14 md:w-[660px] p-6 flex flex-col">
+      <h1 className="text-600 text-balance mx-auto mb-8 max-w-[600px] text-center text-4xl font-bold !leading-[1.0] tracking-tighter text-gray-800 lg:max-w-[900px] lg:text-6xl">
+        ✨ Devine le mot 🧐 !
       </h1>
-      <p>Traduisez le mot suivant :</p>
+      <p className="text-lg ">Traduisez le mot suivant :</p>
       <div className="question mb-4  ">
-        <span className="font-bold">
+        <span className="font-bold text-600 text-gray-800 text-xl">
           {quizData[currentQuestion].word}
         </span>
       </div>
@@ -68,7 +68,7 @@ export default function Quiz() {
       >
         Soumettre
       </button>
-      <p className="feedback mt-4">
+      <p className={`feedback mt-4 ${feedBack !== '' ? feedBack.startsWith("F") ? "rounded-lg border text-red-500 border-red-300 bg-red-100 p-3 shadow-lg" : "rounded-lg border text-green-500 border-green-300 bg-green-100 p-3 shadow-lg" : ''}`}>
         {feedBack}
       </p>
       <p className="score font-semibold mt-2">

@@ -17,10 +17,10 @@ export default function Lessons() {
   };
 
   return (
-    <div>
+    <div className="md:flex">
       <Header />
-      <main className="p-6  ">
-        <h2 className="text-2xl font-bold mb-4 mt-28 md:mt-16">Leçons de Shi-Maoré</h2>
+      <main className="p-6 md:w-[860px] mx-auto ">
+        <h2 className="text-600 text-balance mx-auto mb-8 max-w-[600px] text-center text-4xl font-bold !leading-[1.0] tracking-tighter text-gray-800 lg:max-w-[900px] lg:text-6xl mt-28 md:mt-16">Leçons de Shi-Maoré</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {lessons.map((lesson, index) => (
             <motion.div

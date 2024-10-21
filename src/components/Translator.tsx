@@ -90,7 +90,7 @@ export default function Translator() {
             className="form-radio text-blue-600"
           />
           <span className="text-lg text-gray-700">
-            Français <ArrowRightIcon className="inline size-4 md:size-6" />{" "}
+            Français <ArrowRightIcon className="inline size-4" />{" "}
             Shi-Maoré
           </span>
         </label>
@@ -104,7 +104,7 @@ export default function Translator() {
             className="form-radio text-blue-600"
           />
           <span className="text-lg text-gray-700">
-            Shi-Maoré <ArrowRightIcon className="inline size-4 md:size-6" />{" "}
+            Shi-Maoré <ArrowRightIcon className="inline size-4 " />{" "}
             Français
           </span>
         </label>
@@ -177,7 +177,7 @@ export default function Translator() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <p className="text-lg font-semibold text-red-600">{error}</p>
+          <p className="text-lg font-semibold text-red-500">{error}</p>
         </motion.div>
       )}
     </div>
