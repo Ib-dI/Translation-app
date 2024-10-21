@@ -1,7 +1,7 @@
 export default function Header() {
   return (
-    <header className="bg-white p-4 fixed w-full border-b z-20">
-      <div className="flex flex-col md:w-7/12 md:flex-row lg:justify-between">
+    <header className="bg-white flex p-4 fixed w-full border-b z-20">
+      <div className="flex mx-auto flex-col md:flex-row md:justify-between md:w-4/5">
         <h1 className="text-3xl font-medium text-gray-700">
           Le Shi-Maoré
           <span>
