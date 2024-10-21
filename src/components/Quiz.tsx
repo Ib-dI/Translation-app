@@ -57,7 +57,7 @@ export default function Quiz() {
       </div>
       <input
       type="text"
-      className="border p-2 w-full mb-4 rounded-lg"
+      className=" p-2 w-full mb-4 rounded-lg outline-none border-2 focus-within:border-blue-400"
       value={userAnswer}
       onChange={(e) => setUserAnswer(e.target.value)}
       placeholder="Votre réponse ici"
@@ -71,7 +71,7 @@ export default function Quiz() {
       <p className="feedback mt-4">
         {feedBack}
       </p>
-      <p className="score mt-2">
+      <p className="score font-semibold mt-2">
         Score : {score}
       </p>
     </div>

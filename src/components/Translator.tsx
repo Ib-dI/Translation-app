@@ -1,98 +1,139 @@
-import { ChangeEvent, useState } from "react"
-import { motion } from "framer-motion"
-import translationsData from '../data/translations.json'
-import { LanguageIcon } from "@heroicons/react/16/solid";
+import { ChangeEvent, useState, useRef } from "react";
+import { motion } from "framer-motion";
+import translationsData from "../data/structured_translations.json";
+import { LanguageIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 
-const translations: Record<string, string> = translationsData;
+const translations: Record<string, string[]> = translationsData;
 
 export default function Translator() {
-  const [inputText, setInputText] = useState<string>('')
-  const [translatedText, setTranslatedText] = useState<string>('')
-  const [suggestions, setSuggestions] = useState<string[]>([])
-  const [error, setError] = useState<string>('')
-  const [languageDirection, setLanguageDirection] = useState<'sm-fr' | 'fr-sm'>('fr-sm')
-  
+  const [inputText, setInputText] = useState<string>("");
+  const [translatedText, setTranslatedText] = useState<string>("");
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [error, setError] = useState<string>("");
+  const [languageDirection, setLanguageDirection] = useState<"sm-fr" | "fr-sm">(
+    "fr-sm",
+  );
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const text = e.target.value
-    setInputText(text)
+    const text = e.target.value;
+    setInputText(text);
 
     if (text.trim().length > 0) {
-      const lowerCaseText = text.trim().toLowerCase()
+      const lowerCaseText = text.trim().toLowerCase();
 
-      // Suggestion basées sur la direction de traduction
-      const suggestionsList = languageDirection === 'fr-sm'
-      ? Object.keys(translations).filter(key => key.startsWith(lowerCaseText))
-      : Object.values(translations).filter(value => value.startsWith(lowerCaseText))
+      const suggestionsList =
+        languageDirection === "fr-sm"
+          ? Object.keys(translations).filter((key) =>
+              key.startsWith(lowerCaseText),
+            )
+          : Object.values(translations)
+              .flat()
+              .filter((value) => value.startsWith(lowerCaseText));
 
-      setSuggestions(suggestionsList.slice(0, 5))
+      setSuggestions(suggestionsList.slice(0, 5));
     } else {
-      setSuggestions([])
+      setSuggestions([]);
     }
-  }
+  };
 
   const handleTranslate = (suggestion?: string) => {
-    const textToTranslate = suggestion || inputText.trim().toLowerCase()
+    const textToTranslate = suggestion || inputText.trim().toLowerCase();
 
-    let translation = ''
+    let translationsList: string[] = [];
 
-    if (languageDirection === 'fr-sm') {
-      translation = translations[textToTranslate]
+    if (languageDirection === "fr-sm") {
+      translationsList = translations[textToTranslate] || [];
     } else {
-      translation = Object.keys(translations).find(key => translations[key].toLowerCase() === textToTranslate) || ''
+      translationsList = Object.keys(translations).filter((key) =>
+        translations[key].some(
+          (value) => value.toLowerCase() === textToTranslate,
+        ),
+      );
     }
 
-    if (translation) {
-      setTranslatedText(translation)
-      setError('')
+    if (translationsList.length > 0) {
+      setTranslatedText(translationsList.join(", "));
+      setError("");
+      setSuggestions([]);
     } else {
-      setTranslatedText('')
-      setError("Traduction introuvable. Essayer un autre mot ou phrase.")
+      setTranslatedText("");
+      setError("Traduction introuvable. Essayez un autre mot ou phrase.");
     }
-  }
+  };
+  // Défile la page vers le textarea lorsque le clavier s'ouvre
+  const handleFocus = () => {
+    if (textareaRef.current) {
+      setTimeout(() => {
+        textareaRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 300); // petit délai pour s'assurer que le clavier s'affiche complètement
+    }
+  };
+
   return (
-    <div className="p-6 md:w-[72vh] flex flex-col bg-gray-100 rounded-3xl shadow-lg">
-      <h3 className="text-2xl font-semibold mb-4">Traducteur Shi-Maoré - Français</h3>
+    <div className="flex w-screen flex-col rounded-3xl bg-[#ffffff] p-6 shadow-sm md:w-[660px]">
+      <h3 className="mb-4 text-xl font-bold text-gray-800 md:text-3xl">
+        Traducteur Shi-Maoré - Français
+      </h3>
 
-      <div className="mb-4 ">
-        <label className="mr-4">
+      <div className="mb-4 flex flex-col justify-center md:flex-row md:space-x-10">
+        <label className="flex cursor-pointer items-center space-x-2">
           <input
-            className="mr-1"
             type="radio"
             name="languageDirection"
             value="fr-sm"
-            checked={languageDirection === 'fr-sm'}
-            onChange={() => setLanguageDirection('fr-sm')}
+            checked={languageDirection === "fr-sm"}
+            onChange={() => setLanguageDirection("fr-sm")}
+            className="form-radio text-blue-600"
           />
-          Français vers Shi-Maoré
+          <span className="text-lg text-gray-700">
+            Français <ArrowRightIcon className="inline size-4 md:size-6" />{" "}
+            Shi-Maoré
+          </span>
         </label>
-        <label>
+        <label className="flex cursor-pointer items-center space-x-2">
           <input
-            className="mr-1"
             type="radio"
             name="languageDirection"
             value="sm-fr"
-            checked={languageDirection === 'sm-fr'}
-            onChange={() => setLanguageDirection('sm-fr')}
+            checked={languageDirection === "sm-fr"}
+            onChange={() => setLanguageDirection("sm-fr")}
+            className="form-radio text-blue-600"
           />
-          Shi-Maoré vers Français
+          <span className="text-lg text-gray-700">
+            Shi-Maoré <ArrowRightIcon className="inline size-4 md:size-6" />{" "}
+            Français
+          </span>
         </label>
       </div>
 
-      <textarea className="w-full p-2 rounded-lg mb-4"
-      rows={4}
-      placeholder={`Entrez du texte en ${languageDirection === 'sm-fr' ? 'Shi-Maoré' : 'Français'}...`}
-      value={inputText}
-      onChange={handleInputChange}
+      <textarea
+        ref={textareaRef}
+        className="mb-4 w-full rounded-lg border-2 border-blue-200 p-4 text-lg text-gray-800 shadow-inner focus:border-blue-400 focus:outline-none"
+        rows={4}
+        placeholder={`Entrez du texte en ${
+          languageDirection === "sm-fr" ? "Shi-Maoré" : "Français"
+        }...`}
+        value={inputText}
+        onChange={handleInputChange}
+        onFocus={handleFocus}
       />
 
       {suggestions.length > 0 && (
-        <div className="bg-white border border-gray-300 rounded-lg p-2 mb-4">
+        <div className="mb-4 rounded-lg border border-gray-300 bg-white p-2 shadow-md">
           <ul>
             {suggestions.map((suggestion, index) => (
               <li
                 key={index}
-                className="p-2 hover:bg-blue-100 cursor-pointer"
-                onClick={() => handleTranslate(suggestion)}
+                className="cursor-pointer rounded-md p-2 transition-all duration-200 ease-in-out hover:bg-blue-100"
+                onClick={() => {
+                  setInputText(suggestion);
+                  setSuggestions([]);
+                  handleTranslate(suggestion);
+                }}
               >
                 {suggestion}
               </li>
@@ -102,38 +143,43 @@ export default function Translator() {
       )}
 
       <button
-      className="bg-blue-600 ml-auto flex gap-1 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
-      onClick={() => handleTranslate()}
+        className="ml-auto flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-5 py-2 text-white transition-transform hover:scale-105"
+        onClick={() => handleTranslate()}
       >
-        <LanguageIcon className="size-6" />
+        <LanguageIcon className="h-5 w-5" />
         Traduire
       </button>
 
       {translatedText && (
         <motion.div
-        className="mt-4 p-4 bg-white border border-blue-300 rounded-lg"
-        initial={{ opacity:0, y:10 }}
-        animate={{ opacity:1, y:0 }}
-        transition={{ duration:0.4 }}
+          className="mt-6 rounded-lg border border-blue-300 bg-white p-5 shadow-lg"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
         >
-          <p className="font-medium font-noto">
-            {translatedText}
+          <p className="text-lg font-semibold text-blue-700">
+            Traduction{translatedText.includes(",") ? "s" : ""} :
           </p>
+          <ul className="ml-4 text-base text-gray-700">
+            {translatedText.split(", ").map((translation, index) => (
+              <li key={index} className="mt-1">
+                {translation}
+              </li>
+            ))}
+          </ul>
         </motion.div>
       )}
+
       {error && (
         <motion.div
-        className="mt-4 p-4 bg-red-100 border border-red-300 rounded-lg"
-        initial={{ opacity:0, y:10 }}
-        animate={{ opacity:1, y:0 }}
-        transition={{ duration:0.4 }}
+          className="mt-6 rounded-lg border border-red-300 bg-red-100 p-5 shadow-lg"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
         >
-          <p className="text-red-600 font-noto">
-            {error}
-          </p>
+          <p className="text-lg font-semibold text-red-600">{error}</p>
         </motion.div>
       )}
-      
     </div>
-  )
+  );
 }
