@@ -5,13 +5,7 @@ export default function Header() {
         <a href="/">
           <h1 className="text-3xl font-medium text-gray-700">
             Le <span className="relative inline-flex"><span className="absolute inset-0 h-full w-full bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] tracking-tighter opacity-30 blur-md filter"></span><span className="relative"> Shi-Maoré </span></span>
-            <span>
-              <img
-                src="/images/flag-mayotte.png"
-                alt="flag-mayotte"
-                className="ml-2 inline w-7 md:w-10"
-              />
-            </span>
+            
           </h1>
         </a>
 
