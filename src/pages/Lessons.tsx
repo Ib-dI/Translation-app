@@ -31,7 +31,7 @@ export default function Lessons() {
             >
               <LessonCard
                 title={lesson.title}
-                description={lesson.description}
+                description={JSON.stringify(lesson.description)} // Convertir en chaîne de caractères
                 onClick={() => handleCardClick({ title: lesson.title, content: lesson.content })} // Passer la leçon sélectionnée
               />
             </motion.div>
