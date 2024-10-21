@@ -1,14 +1,20 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Header from "../components/Header"; // Assurez-vous d'importer le Header
-import { lessons } from "../data/lessonData"; // Assurez-vous d'importer les données
-import LessonCard from "../components/LessonCard"; // Assurez-vous d'importer LessonCard
-import Modal from "../components/Modal"; // Importer le nouveau composant Modal
+import Header from "../components/Header";
+import { lessons, LessonContent } from "../data/lessonData";
+import LessonCard from "../components/LessonCard";
+import Modal from "../components/Modal";
+
+// On définit le type pour les leçons sélectionnées
+type SelectedLesson = {
+  title: string;
+  content: LessonContent[];
+};
 
 export default function Lessons() {
-  const [selectedLesson, setSelectedLesson] = useState<{ title: string; content: string } | null>(null);
+  const [selectedLesson, setSelectedLesson] = useState<SelectedLesson | null>(null);
 
-  const handleCardClick = (lesson: { title: string; content: string }) => {
+  const handleCardClick = (lesson: SelectedLesson) => {
     setSelectedLesson(lesson); // Afficher la modale avec les détails de la leçon
   };
 
@@ -20,7 +26,7 @@ export default function Lessons() {
     <div className="md:flex">
       <Header />
       <main className="p-6 md:w-[860px] mx-auto ">
-        <h2 className="text-600 text-balance mx-auto mb-8 max-w-[600px] text-center text-4xl font-bold !leading-[1.0] tracking-tighter text-gray-800 lg:max-w-[900px] lg:text-6xl mt-28 md:mt-16">Leçons de Shi-Maoré</h2>
+        <h2 className="text-2xl font-bold mb-4 mt-28 md:mt-16">Leçons de Shi-Maoré</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {lessons.map((lesson, index) => (
             <motion.div
@@ -31,13 +37,17 @@ export default function Lessons() {
             >
               <LessonCard
                 title={lesson.title}
-                description={JSON.stringify(lesson.description)} // Convertir en chaîne de caractères
-                onClick={() => handleCardClick({ title: lesson.title, content: lesson.content })} // Passer la leçon sélectionnée
+                description={lesson.description}
+                onClick={() =>
+                  handleCardClick({
+                    title: lesson.title,
+                    content: lesson.content.filter((c): c is LessonContent => !!c), // Filtrer les éléments undefined
+                  })
+                }
               />
             </motion.div>
           ))}
         </div>
-
         {/* Affichage de la modale si une leçon est sélectionnée */}
         {selectedLesson && (
           <Modal

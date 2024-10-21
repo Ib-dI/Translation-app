@@ -45,7 +45,7 @@ export default function Modal({ title, content, onClose }: ModalProps) {
           if (item.type === "text") {
             return (
               <p key={index} className="text-gray-700 leading-7 mb-6">
-                {item.value}
+                {item.value as string}
               </p>
             );
           } else if (item.type === "table") {

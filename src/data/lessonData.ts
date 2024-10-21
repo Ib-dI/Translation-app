@@ -1,8 +1,19 @@
+export type LessonContent =
+  | { type: "text"; value: string }
+  | { type: "table"; value: { header: string[]; rows: string[][] } };
+
+export type Lesson = {
+  id: number;
+  title: string;
+  description: string;
+  content: LessonContent[];
+};
 export const lessons = [
   {
     id: 1,
     title: "1 - Les Salutations",
-    description: "Nous verrons à travers ce chapitre comment se font les salutations.",
+    description:
+      "Nous verrons à travers ce chapitre comment se font les salutations.",
     content: [
       {
         type: "text",
@@ -16,7 +27,7 @@ export const lessons = [
       {
         type: "table",
         value: {
-          header: ["SALUTATIONS","Français", "RÉPONSES","Français"],
+          header: ["SALUTATIONS", "Français", "RÉPONSES", "Français"],
           rows: [
             [],
             ["- Jeje", "= Bonjour ! Ça va ?", "- Ndjema !", "= Bien !"],
@@ -237,9 +248,9 @@ export const lessons = [
   {
     id: 2,
     title: "2 - Les Verbes : L'Infinitif",
-    description: "Savoir conjuguer les verbes peut être un plus sur la comprehension.",
+    description:
+      "Savoir conjuguer les verbes peut être un plus sur la comprehension.",
     content: [
-      
       {
         type: "text",
         value:
@@ -342,7 +353,8 @@ export const lessons = [
   {
     id: 3,
     title: "3 - Les Verbes : L'Impératif",
-    description: "Nous verrons dans cette partie comment est constituer l'impératif",
+    description:
+      "Nous verrons dans cette partie comment est constituer l'impératif",
     content: [
       {
         type: "text",
@@ -520,7 +532,8 @@ export const lessons = [
   {
     id: 4,
     title: "4 - Les classes Nominales",
-    description: "Le shi-maore est une langue qui n'a pas de genre grammaticaux",
+    description:
+      "Le shi-maore est une langue qui n'a pas de genre grammaticaux",
     content: [
       {
         type: "text",
@@ -718,7 +731,6 @@ export const lessons = [
     title: "5 - Les Noms : Le Genre MU-/WA-",
     description: "Contenu du chapitre 5.",
     content: [
-
       {
         type: "table",
         value: {
@@ -1710,7 +1722,7 @@ export const lessons = [
       },
       {
         type: "text",
-        value: "MODÈLE :    USOMA = lire",
+        value: "MODÈLE:USOMA = lire",
       },
       {
         type: "table",
@@ -2765,7 +2777,7 @@ export const lessons = [
       },
       {
         type: "text",
-        value: "EXCEPTIONS :    LES VERBES MONOSYLLABIQUES :",
+        value: "EXCEPTIONS :LES VERBES MONOSYLLABIQUES :",
       },
       {
         type: "table",
@@ -5657,18 +5669,6 @@ export const lessons = [
           ],
         },
       },
-      {
-        type: "text",
-        value: "EXERCICE 1 : Traduisez en shimaore :",
-      },
-      {
-        type: "text",
-        value: "EXERCICE 2 : Traduisez en français :",
-      },
-      {
-        type: "text",
-        value: "EXERCICE 3 : Traduisez en français :",
-      },
     ],
   },
   {
@@ -5823,15 +5823,15 @@ export const lessons = [
           rows: [
             [
               "1. U-SI-NI-ONA",
-              "->  Usiniona",
-              "=   tu me vois.",
+              "-> Usiniona",
+              "= tu me vois.",
               "Compl. d'objet",
             ],
             ["2. TSI-HU-AMBIA", "-> Tsihuambia", "=   je te dis.", "Attribut"],
             [
               "3. A-MU-REME",
               "-> Amureme",
-              "=   il / elle l'a frappé(e).",
+              "= il / elle l'a frappé(e).",
               "Compl. d'objet",
             ],
             [
@@ -6206,8 +6206,7 @@ export const lessons = [
       },
       {
         type: "text",
-        value:
-          "MODÈLE :          UENDRA UNUNUA TROVI = aller acheter des bananes",
+        value: "MODÈLE: UENDRA UNUNUA TROVI = aller acheter des bananes",
       },
       {
         type: "text",
@@ -6668,7 +6667,7 @@ export const lessons = [
       {
         type: "text",
         value:
-          "A titre de comparaison, on peut en français modifier le sens d'un verbe en lui adjoignant certains préfixes. Par exemple :\n  \n  \n  \n  \n  \n   prendre\n  comprendre\n  apprendre\n  surprendre\n  reprendre",
+          "A titre de comparaison, on peut en français modifier le sens d'un verbe en lui adjoignant certains préfixes. Par exemple :\n  \n  \n  \n  \n  \nprendre\n  comprendre\n apprendre\n surprendre\n  reprendre",
       },
       {
         type: "text",
@@ -7376,8 +7375,7 @@ export const lessons = [
       },
       {
         type: "text",
-        value:
-          "EXEMPLES :         lier        :  délier           faire        :  défaire         jeûner       :  déjeuner",
+        value: "EXEMPLES : lier  :  délier faire :  défaire jeûner : déjeuner",
       },
       {
         type: "text",
@@ -7620,18 +7618,6 @@ export const lessons = [
             ["Uvisa", "= frire", "-> Trovi yaviswa", "= banane frite"],
           ],
         },
-      },
-      {
-        type: "text",
-        value: "PROVERBE :",
-      },
-      {
-        type: "text",
-        value: "EXERCICE 1 :  Traduisez en shimaore :",
-      },
-      {
-        type: "text",
-        value: "EXERCICE 2 : Traduisez en français :",
       },
     ],
   },
@@ -9048,4 +9034,4 @@ export const lessons = [
       },
     ],
   },
-]
+];
