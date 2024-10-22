@@ -728,16 +728,16 @@ export const lessons = [
   },
   {
     id: 5,
-    title: "5 - Les Noms : Le Genre MU-/WA-",
-    description: "Contenu du chapitre 5.",
+    title: "5 - Le Genre MU/WA",
+    description: "Cette partie potera sur la distinction du genre, cela paraît difficile mais tranquille 🤣...",
     content: [
       {
         type: "table",
         value: {
           header: [],
           rows: [
-            [
-              "",
+            [ 
+              "Attention",
               "Le genre MU-/WA- (Classes 1 / 2) contient exclusivement des noms de personnes.",
             ],
           ],
@@ -748,23 +748,39 @@ export const lessons = [
         value: {
           header: [],
           rows: [
-            ["Cl 1 (Singulier) :", "préfixe MU-", "MUTRU", "= un homme"],
-            [
-              "La voyelle U du préfixe de classe singulier MU- est très faiblement prononcée, ou même pas du tout. Nous avons cependant gardé cette voyelle en conformité avec les règles orthographiques de l'Association SHIME.",
-            ],
-            ["Cl 2 (Pluriel) :", "préfixe WA-", "WATRU", "= des hommes"],
-            ["A NOTER :"],
+            ["Cl 1 (Singulier) :", "préfixe MU-", "MUTRU= un homme"],
+            
+          ],
+        },
+      },
+      {
+        type: "text",
+        value: "La voyelle U du préfixe de classe singulier MU- est très faiblement prononcée, ou même pas du tout. Nous avons cependant gardé cette voyelle en conformité avec les règles orthographiques de l'Association SHIME.",
+      },
+      {
+        type: "table",
+        value: {
+          header: [],
+          rows: [
+            
+            ["Cl 2 (Pluriel) :", "préfixe WA-", "WATRU= des hommes"],
+          ],
+        },
+      },
+      {
+        type: "table",
+        value: {
+          header: ["A NOTER :"],
+          rows: [
             [
               "Devant une voyelle,",
               "le préfixe singulier MU- devient MW- :",
-              "MWANA",
-              "= un enfant",
+              "MWANA= un enfant",
             ],
             [
               "",
               "Le préfixe pluriel  WA- devient W- :",
-              "WANA",
-              "= des enfants",
+              "WANA= des enfants",
             ],
           ],
         },
@@ -963,16 +979,24 @@ export const lessons = [
   },
   {
     id: 6,
-    title: "VOCABULAIRE",
-    description: "Contenu du chapitre 6.",
+    title: "6 - Les Pronoms Sujets",
+    description: "Le Shi-Maoré est complexe ce qui en fait sa richesse, dans cette partie on verra les types de pronoms sujets.",
     content: [
-      {
-        type: "titre",
-        value: "Chapitre 7 - Les Pronoms Sujets",
-      },
       {
         type: "text",
         value: "Il existe en shimaore deux catégories de pronoms sujets :",
+      },
+      {
+        type: "text",
+        value: "1. Les PRONOMS PERSONNELS AUTONOMES : \n Ceux-ci sont surtout utilisés avec le PRÉSENT HABITUEL. \n Ils peuvent aussi être utilisés aux autres temps, pour renforcer le sujet.",
+      },
+      {
+        type: "text",
+        value: "2. Les PRÉFIXES SUJETS : \n On peut distinguer deux sortes de péfixes sujets : \n - Les indices pronoms sujets \n - Les indices d'accord de classe",
+      },
+      {
+        type: "text",
+        value: "Ils sont utilisés à tous les temps, excepté le présent habituel, et sont accrochés au verbe. \n A la 3ème personne du singulier et du pluriel, il n'y a pas substitution entre le nom sujet et le préfixe sujet, mais complémentarité : le préfixe sujet est là, même lorsque le nom sujet est déjà exprimé dans la phrase.",
       },
       {
         type: "text",
@@ -1259,12 +1283,12 @@ export const lessons = [
   },
   {
     id: 7,
-    title: "VOCABULAIRE",
+    title: "7 - Les Verbes : Le Présent Actuel",
     description: "Contenu du chapitre 7.",
     content: [
       {
         type: "titre",
-        value: "Chapitre 8 - Les Verbes : Le Présent Actuel",
+        value: "Chapitre 8 ",
       },
       {
         type: "text",
