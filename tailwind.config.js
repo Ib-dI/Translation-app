@@ -9,7 +9,10 @@ export default {
       fontFamily: {
         sans: ['Fira Sans', 'sans-serif'],
         noto: ['Noto Sans']
-      }
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
     },
   },
   plugins: [],

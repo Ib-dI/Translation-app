@@ -30,7 +30,7 @@ export default function Modal({ title, content, onClose }: ModalProps) {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full relative max-h-[90vh] overflow-y-auto" // Ajout du scroll
+        className="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full relative max-h-[90vh] overflow-y-auto " // Ajout du scroll
       >
         <button
           onClick={onClose}

@@ -11,7 +11,7 @@ export default function LessonCard({ title, description, onClick }: LessonCardPr
     <motion.div
     whileHover={{ scale: 1.02, y: -5 }}
     whileTap={{ scale: 0.98 }}
-    className="p-4 border rounded-3xl shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+    className="p-4 border rounded-3xl shadow-sm hover:shadow-md transition-shadow cursor-pointer min-h-32"
     onClick={onClick}
     >
       <h3 className="text-xl font-semibold">{title}</h3>
